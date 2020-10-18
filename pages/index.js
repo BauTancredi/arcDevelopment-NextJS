@@ -294,7 +294,7 @@ const LandingPage = (props) => {
           <Grid item style={{ marginRight: matchesSM ? 0 : "5em" }}>
             <img
               className={classes.icon}
-              src="/assets/mobile.svg"
+              src="/assets/mobileIcon.svg"
               alt="mobile apps icon"
             />
           </Grid>
@@ -343,7 +343,7 @@ const LandingPage = (props) => {
           <Grid item>
             <img
               className={classes.icon}
-              src="/assets/website.svg"
+              src="/assets/websiteIcon.svg"
               alt="website icon"
             />
           </Grid>
