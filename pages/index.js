@@ -245,7 +245,7 @@ const LandingPage = (props) => {
           <Grid item>
             <img
               className={classes.icon}
-              src="/assets/customSoftware.svg"
+              src="/assets/CustomSoftware.svg"
               alt="custom software icon"
             />
           </Grid>

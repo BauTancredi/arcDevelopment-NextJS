@@ -237,7 +237,7 @@ const Footer = (props) => {
         </Grid>
       </Hidden>
       <img
-        src="/assets/footerAdornment.svg"
+        src="/assets/FooterAdornment.svg"
         alt="black decorative slash"
         className={classes.adornment}
       />
