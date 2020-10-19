@@ -1,4 +1,5 @@
 import React, { Fragment, useState } from "react";
+import ReactGA from "react-ga";
 import axios from "axios";
 import { cloneDeep } from "lodash";
 import Head from "next/head";
@@ -575,6 +576,10 @@ const Estimate = () => {
 
   const sendEstimate = () => {
     setLoading(true);
+    ReactGA.event({
+      category: "Estimate",
+      action: "Estimate Sent",
+    });
 
     const url =
       "https://us-central1-material-ui-course-ddbd0.cloudfunctions.net/sendMail";
@@ -928,6 +933,10 @@ const Estimate = () => {
               getFeatures();
               getCustomFeatures();
               getCategory();
+              ReactGA.event({
+                category: "Estimate",
+                action: "Estimate Checked",
+              });
             }}
             disabled={estimateDisable()}
           >

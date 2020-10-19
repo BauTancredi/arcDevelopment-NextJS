@@ -1,6 +1,6 @@
 import React, { Fragment, useState, useEffect } from "react";
+import ReactGA from "react-ga";
 import Link from "../Link";
-
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import useScrollTrigger from "@material-ui/core/useScrollTrigger";
@@ -10,7 +10,6 @@ import Tab from "@material-ui/core/Tab";
 import Button from "@material-ui/core/Button";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
-import UseMediaQuery from "@material-ui/core/useMediaQuery";
 import { useTheme } from "@material-ui/core/styles";
 import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
 import MenuIcon from "@material-ui/icons/Menu";
@@ -125,11 +124,11 @@ const Header = (props) => {
   const classes = useStyles();
   const theme = useTheme();
   const iOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent);
-  const matches = UseMediaQuery(theme.breakpoints.down("md"));
 
   const [anchorEl, setAnchorEl] = useState(null);
   const [openMenu, setOpenMenu] = useState(false);
   const [openDrawer, setOpenDrawer] = useState(false);
+  const [previousURL, setpPreviousURL] = useState(false);
 
   const menuOptions = [
     {
@@ -190,6 +189,10 @@ const Header = (props) => {
   ];
 
   useEffect(() => {
+    if (previousURL !== window.location.pathname) {
+      setpPreviousURL(window.location.pathname);
+      ReactGA.pageview(window.location.pathname + window.location.search);
+    }
     [...menuOptions, ...routes].forEach((route) => {
       switch (window.location.pathname) {
         case `${route.link}`:
@@ -261,7 +264,13 @@ const Header = (props) => {
         component={Link}
         href="/estimate"
         className={classes.button}
-        onClick={() => props.setValue(5)}
+        onClick={() => {
+          props.setValue(5);
+          ReactGA.event({
+            category: "Estimate",
+            action: "Desktop Header Pressed",
+          });
+        }}
       >
         Free Estimate
       </Button>
@@ -335,6 +344,10 @@ const Header = (props) => {
             onClick={() => {
               setOpenDrawer(false);
               props.setValue(5);
+              ReactGA.event({
+                category: "Estimate",
+                action: "Mobile Header Pressed",
+              });
             }}
             classes={{
               root: classes.drawerItemEstimate,
